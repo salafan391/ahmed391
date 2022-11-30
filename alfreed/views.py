@@ -18,37 +18,46 @@ def sales_view(request):
             return redirect('index')
     return render(request,'alfreed/sales.html',{'form':form})
 
-def income_view(request):
-    form = IncomeForm()
+def update_income_view(request,pk):
+    income = Sales.objects.get(pk=pk)
+    form = IncomeForm(instance=income)
     if request.method == 'POST':
-        form= IncomeForm(request.POST)
+        form = IncomeForm(request.POST,instance=income)
         if form.is_valid():
             form.save()
             return redirect('index')
-    return render(request,'alfreed/income.html',{'form':form})
+    return render(request,'alfreed/income_form.html',{'form':form})
 
-
-def outcome_view(request):
-    form = OutcomeForm()
+def update_outcome_view(request,pk):
+    outcome = Sales.objects.get(pk=pk)
+    form = OutcomeForm(instance=outcome)
     if request.method == 'POST':
-        form= OutcomeForm(request.POST)
+        form = OutcomeForm(request.POST,instance=outcome)
         if form.is_valid():
             form.save()
             return redirect('index')
-    return render(request,'alfreed/outcome.html',{'form':form})
+    return render(request,'alfreed/outcome_form.html',{'form':form})
+
 
 def details(request,pk):
     product = Sales.objects.get(pk=pk)
     buyer = product.worker.all()
-    income = product.incomes_set.all()
-    outcome = product.outcomes_set.all()
-    form_income = IncomeForm()
-    form_outcome = OutcomeForm
     return render(request,'alfreed/details.html',{
         'product':product,
         'workers':buyer,
-        'incomes':income,
-        'outcomes':outcome,
-        'form_income': form_income,
-        'form_outcome':form_outcome
         })
+def delete(request,pk):
+    delete = Sales.objects.get(pk=pk)
+    if request.method == 'POST':
+        delete.delete()
+        return redirect('index')
+    return render(request,'alfreed/delete.html',{'delete':delete})
+def update_sales_view(request,pk):
+    sales = Sales.objects.get(pk=pk)
+    form = UpdateSalesForm(instance=sales)
+    if request.method == 'POST':
+        form = UpdateSalesForm(request.POST,instance=sales)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+    return render(request,'alfreed/outcome_form.html',{'form':form})

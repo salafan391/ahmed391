@@ -5,36 +5,52 @@ from .models import *
 class SalesForm(ModelForm):
     class Meta:
         model = Sales
-        fields = '__all__'
+        exclude = ['income', 'receipiant', 'outcome', 'type', 'person']
         labels = {
-            'worker':'اسم المشتري',
-            'products':'البضاعة',
-            'quantity':'الكمية',
-            'paid':'قيمة البضاعة',
-            'date_created':'تاريخ ووقت الشراء'
+            'worker': 'اسم المشتري',
+            'products': 'البضاعة',
+            'quantity': 'الكمية',
+            'paid': 'قيمة البضاعة',
+            'date_created': 'تاريخ ووقت الشراء',
         }
-        widgets={
-            'date_created':DateTimeInput(attrs={'type':'datetime-local'})
+        widgets = {
+            
+            'products':TextInput(attrs={}),
+            'quantity':NumberInput(attrs={}),
+            'paid':NumberInput(attrs={}),
+            'date_created': DateTimeInput(attrs={'type': 'datetime-local'})
         }
 
 
 class IncomeForm(ModelForm):
     class Meta:
-        model = Incomes
-        fields = '__all__'
+        model = Sales
+        fields = ['income', 'receipiant']
         labels = {
-            'income':'الدخل',
-            'receipiant':'المستلم',
-            'sales':'البضاعة',
+            'income': 'الدخل',
+            'receipiant': 'المستلم',
+
         }
-        
+        widgets={
+            'income':NumberInput(attrs={}),
+        }
+
+
 class OutcomeForm(ModelForm):
     class Meta:
-        model = Outcomes
-        fields = '__all__'
+        model = Sales
+        fields = ['outcome', 'type', 'person']
         labels = {
-            'outcome':'الخرج',
-            'type':'نوع الخرج',
-            'person':'اسم المخرج',
-            'sales':'البضاعة'
+            'outcome': 'الخرج',
+            'type': 'نوع الخرج',
+            'person': 'اسم المخرج',
         }
+        widgets={
+            'outcome':NumberInput(attrs={}),
+            'type':TextInput(attrs={})
+        }
+class UpdateSalesForm(ModelForm):
+    class Meta:
+        model = Sales
+        fields = '__all__'
+        

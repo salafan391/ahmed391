@@ -1,30 +1,22 @@
 {% extends 'main.html' %}
 {% block content %}
-    <h1><a href="{% url 'index' %}">الفريد</a></h1>
-    <a href="{% url 'income' %}">إضافة دخل</a>
-    <a href="{% url 'outcome' %}">إضافة خرج</a></p>
+    <a href="{% url 'update_income' product.pk %} ">إضافة دخل</a>
+    <a href="{% url 'update_outcome' product.pk %}">إضافة خرج</a></p>
     <p>عنوان البضاعة {{product}} </p> 
-    {% for worker in workers  %}
+    {% for worker in workers %}
         <p>المشتري <span>{{worker}}</span></p> 
     {% endfor %}
     <p>قيمة البضاعة {{product.paid}}</p>
     <p>الكمية {{product.quantity}}</p>
-    <p>تاريخ ووقت الشراء {{product.date_created}}</p>
-    {% for income in incomes %}
-        <p>مقدار الدخل {{income}}</p>
+    <p>تاريخ ووقت الشراء {{product.date_created|date}}</p>
+    <p>المخرج {{product.outcome}}</p>
+    <p>نوع المخرجات {{product.type}}</p>
+    {% for worker in product.person.all %}
+        <p>المخرج {{worker}}</p>
     {% endfor %}
-    {% for outcome in outcomes %}
-{% endblock content %}
     
-        
-    
-    <p>مقدار الخرج {{outcome}}</p>
-        
-    {% for name in outcome.person.all %}
-    <p>اسم المخرج <span>{{name}}</span></p>
-        {% endfor %}
-    {% endfor %}
 
+{% endblock content %}
     
     
         
