@@ -14,11 +14,11 @@ class SalesForm(ModelForm):
             'date_created': 'تاريخ ووقت الشراء',
         }
         widgets = {
-            
-            'products':TextInput(attrs={}),
-            'quantity':NumberInput(attrs={}),
-            'paid':NumberInput(attrs={}),
-            'date_created': DateTimeInput(attrs={'type': 'datetime-local'})
+
+            'products': TextInput(attrs={'class': "form-label", 'class': 'form-control'}),
+            'quantity': NumberInput(attrs={'class': "form-label"}),
+            'paid': NumberInput(attrs={'class': "form-label"}),
+            'date_created': DateTimeInput(attrs={'type': 'datetime-local', 'class': "form-label", 'class': "form-control"})
         }
 
 
@@ -31,8 +31,8 @@ class IncomeForm(ModelForm):
             'receipiant': 'المستلم',
 
         }
-        widgets={
-            'income':NumberInput(attrs={}),
+        widgets = {
+            'income': NumberInput(attrs={'class': "form-label"}),
         }
 
 
@@ -45,12 +45,34 @@ class OutcomeForm(ModelForm):
             'type': 'نوع الخرج',
             'person': 'اسم المخرج',
         }
-        widgets={
-            'outcome':NumberInput(attrs={}),
-            'type':TextInput(attrs={})
+        widgets = {
+            'outcome': NumberInput(attrs={'class': "form-label"}),
+            'type': TextInput(attrs={'class': "form-label", 'class': 'form-control'})
         }
+
+
 class UpdateSalesForm(ModelForm):
     class Meta:
         model = Sales
         fields = '__all__'
-        
+        labels = {
+            'worker': 'اسم المشتري',
+            'products': 'البضاعة',
+            'quantity': 'الكمية',
+            'paid': 'قيمة البضاعة',
+            'date_created': 'تاريخ ووقت الشراء',
+            'income': 'الدخل',
+            'receipiant': 'المستلم',
+            'outcome': 'الخرج',
+            'type': 'نوع الخرج',
+            'person': 'اسم المخرج',
+        }
+        widgets = {
+            'products': TextInput(attrs={'class': "form-label", 'class': 'form-control'}),
+            'quantity': NumberInput(attrs={'class': "form-label"}),
+            'paid': NumberInput(attrs={'class': "form-label"}),
+            'date_created': DateTimeInput(attrs={'type': 'datetime-local', 'class': "form-label", 'class': "form-control"}),
+            'income': NumberInput(attrs={'class': "form-label"}),
+            'outcome': NumberInput(attrs={'class': "form-label"}),
+            'type': TextInput(attrs={'class': "form-label", 'class': 'form-control'})
+        }

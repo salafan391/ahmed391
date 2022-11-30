@@ -1,9 +1,12 @@
 {% extends 'main.html' %}
+{% load static %}
 {% block content %}
 <form action="" method="POST">
+    <div class="mb-3">
     {% csrf_token %}
 <p>هل انت متأكد من حذف {{product.name}}</p>
-<button><a href="{{request.META.HTTP_REFERER}}">تراجع</a></button>
-    <input type="submit" value="حذف">
+<button class="btn btn-primary"><a href="{{request.META.HTTP_REFERER}}">تراجع</a></button>
+    <input class="btn btn-primary" type="submit" value="حذف">
+</div>
 </form>
 {% endblock content %}
