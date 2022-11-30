@@ -5,7 +5,7 @@ from .models import *
 
 def index(request):
     products = Sales.objects.all()
-    return render(request,'forms/index.html',{
+    return render(request,'alfreed/index.html',{
         'products':products,
         })
 
@@ -16,7 +16,7 @@ def sales_view(request):
         if form.is_valid():
             form.save()
             return redirect('index')
-    return render(request,'forms/sales.html',{'form':form})
+    return render(request,'alfreed/sales.html',{'form':form})
 
 def income_view(request):
     form = IncomeForm()
@@ -25,7 +25,7 @@ def income_view(request):
         if form.is_valid():
             form.save()
             return redirect('index')
-    return render(request,'forms/income.html',{'form':form})
+    return render(request,'alfreed/income.html',{'form':form})
 
 
 def outcome_view(request):
@@ -35,7 +35,7 @@ def outcome_view(request):
         if form.is_valid():
             form.save()
             return redirect('index')
-    return render(request,'forms/outcome.html',{'form':form})
+    return render(request,'alfreed/outcome.html',{'form':form})
 
 def details(request,pk):
     product = Sales.objects.get(pk=pk)
@@ -44,7 +44,7 @@ def details(request,pk):
     outcome = product.outcomes_set.all()
     form_income = IncomeForm()
     form_outcome = OutcomeForm
-    return render(request,'forms/details.html',{
+    return render(request,'alfreed/details.html',{
         'product':product,
         'workers':buyer,
         'incomes':income,
