@@ -1,0 +1,23 @@
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1><a href="{% url 'index' %}">الفريد</a></h1>
+    <a href="{% url 'sales' %}">المشتريات</a>
+    <a href="{% url 'income' %}">المدخلات</a>
+    <a href="{% url 'outcome' %}">المخرجات</a>
+    <ul>
+        {% for product in products  %}
+        {% for worker in product.worker.all  %}
+       <li> <a href="{% url 'details' product.id %}">عملية شراء جديدة ({{product.products}})بواسطة {{worker}} بتاريخ {{product.date_created|date}}</a>
+    </li> 
+        
+       {% endfor %}
+        {% endfor %}
+    </ul>
+</body>
+</html>

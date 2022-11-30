@@ -1,0 +1,39 @@
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1><a href="{% url 'index' %}">الفريد</a></h1>
+    <a href="{% url 'income' %}">إضافة دخل</a>
+    <a href="{% url 'outcome' %}">إضافة خرج</a></p>
+    <p>عنوان البضاعة {{product}} </p> 
+    {% for worker in workers  %}
+        <p>المشتري <span>{{worker}}</span></p> 
+    {% endfor %}
+    <p>قيمة البضاعة {{product.paid}}</p>
+    <p>الكمية {{product.quantity}}</p>
+    <p>تاريخ ووقت الشراء {{product.date_created}}</p>
+    {% for income in incomes %}
+        <p>مقدار الدخل {{income}}</p>
+    {% endfor %}
+    {% for outcome in outcomes %}
+        
+    
+    <p>مقدار الخرج {{outcome}}</p>
+        
+    {% for name in outcome.person.all %}
+    <p>اسم المخرج <span>{{name}}</span></p>
+        {% endfor %}
+    {% endfor %}
+
+    
+    
+        
+    
+    
+
+</body>
+</html>

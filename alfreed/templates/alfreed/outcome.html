@@ -1,4 +1,4 @@
-<html lang="en">
+<html dir="rtl" lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -6,6 +6,11 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>home other</h1>
+    <h1><a href="{% url 'index' %}">الفريد</a></h1>
+    <form action="" method="POST">
+        {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="حفظ">
+</form>
 </body>
 </html>
