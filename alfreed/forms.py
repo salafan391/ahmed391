@@ -78,9 +78,7 @@ class UpdateSalesForm(ModelForm):
             'income': NumberInput(attrs={'class': "form-label",'class': 'form-control'}),
             'outcome': NumberInput(attrs={'class': "form-label",'class': 'form-control'}),
             'type': TextInput(attrs={'class': "form-label", 'class': 'form-control'}),
-            'person':SelectMultiple(attrs={'class':"form-label", 'class':'form-control'}),
-            'receipiant':SelectMultiple(attrs={'class': "form-label",'class': 'form-control'}),
+            'person':SelectMultiple(attrs={'class':"form-label", 'class':"form-select"}),
+            'receipiant':SelectMultiple(attrs={'class': "form-label",'class': "form-select"}),
             'worker':SelectMultiple(attrs={'class': "form-label",'class':"form-select"})
-
-
         }
