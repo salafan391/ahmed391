@@ -1,13 +1,18 @@
 {% extends 'main.html' %}
 {% block content %}
 <form action="" method="POST">
-    <div>
+    <div class="mb-3">
     {% csrf_token %}
     {% for field in form %}
+    <div>
       {{field.label_tag}}
-      {{field}}  
+      {{field}}
+    </div>  
     {% endfor %}
-    <input type="submit">
+    
 </div>
+<div class="d-grid gap-2">
+      <input class="btn btn-primary" type="submit" value="حفظ">
+  </div>
 </form>
 {% endblock content %}

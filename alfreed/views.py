@@ -4,7 +4,7 @@ from .models import *
 # Create your views here.
 
 def index(request):
-    products = Sales.objects.all()
+    products = Sales.objects.all()[:3]
     return render(request,'alfreed/index.html',{
         'products':products,
         })

@@ -16,8 +16,8 @@ class SalesForm(ModelForm):
         widgets = {
 
             'products': TextInput(attrs={'class': "form-label", 'class': 'form-control'}),
-            'quantity': NumberInput(attrs={'class': "form-label"}),
-            'paid': NumberInput(attrs={'class': "form-label"}),
+            'quantity': NumberInput(attrs={'class': "form-label",'class':'range'}),
+            'paid': NumberInput(attrs={'class': "form-label",'class':'range'}),
             'date_created': DateTimeInput(attrs={'type': 'datetime-local', 'class': "form-label", 'class': "form-control"})
         }
 
@@ -27,12 +27,13 @@ class IncomeForm(ModelForm):
         model = Sales
         fields = ['income', 'receipiant']
         labels = {
-            'income': 'الدخل',
+            'income': 'مبلغ الدخل',
             'receipiant': 'المستلم',
 
         }
         widgets = {
-            'income': NumberInput(attrs={'class': "form-label"}),
+            'income': NumberInput(attrs={'class': "form-label",'class': 'form-control'}),
+            'receipiant':SelectMultiple(attrs={'class': "form-label",'class': 'form-control'})
         }
 
 
@@ -41,7 +42,7 @@ class OutcomeForm(ModelForm):
         model = Sales
         fields = ['outcome', 'type', 'person']
         labels = {
-            'outcome': 'الخرج',
+            'outcome': 'مبلغ الخرج',
             'type': 'نوع الخرج',
             'person': 'اسم المخرج',
         }
@@ -61,18 +62,18 @@ class UpdateSalesForm(ModelForm):
             'quantity': 'الكمية',
             'paid': 'قيمة البضاعة',
             'date_created': 'تاريخ ووقت الشراء',
-            'income': 'الدخل',
+            'income': 'مبلغ الدخل',
             'receipiant': 'المستلم',
-            'outcome': 'الخرج',
+            'outcome': 'مبلغ الخرج',
             'type': 'نوع الخرج',
             'person': 'اسم المخرج',
         }
         widgets = {
             'products': TextInput(attrs={'class': "form-label", 'class': 'form-control'}),
-            'quantity': NumberInput(attrs={'class': "form-label"}),
-            'paid': NumberInput(attrs={'class': "form-label"}),
+            'quantity': NumberInput(attrs={'class': "form-label",'class': 'form-control'}),
+            'paid': NumberInput(attrs={'class': "form-label",'class': 'form-control'}),
             'date_created': DateTimeInput(attrs={'type': 'datetime-local', 'class': "form-label", 'class': "form-control"}),
-            'income': NumberInput(attrs={'class': "form-label"}),
-            'outcome': NumberInput(attrs={'class': "form-label"}),
+            'income': NumberInput(attrs={'class': "form-label",'class': 'form-control'}),
+            'outcome': NumberInput(attrs={'class': "form-label",'class': 'form-control'}),
             'type': TextInput(attrs={'class': "form-label", 'class': 'form-control'})
         }

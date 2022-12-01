@@ -1,20 +1,39 @@
 {% extends 'main.html' %}
 {% block content %}
-    <a href="{% url 'update_income' product.pk %} ">إضافة دخل</a>
-    <a href="{% url 'update_outcome' product.pk %}">إضافة خرج</a></p>
-    <p>عنوان البضاعة {{product}} </p> 
+<style>
+.detail-container{
+    border: 1px solid gray;
+    text-align: center;
+    font-weight: bold;
+    color: brown;
+    margin: 10px;
+}
+a{
+    text-decoration: none;
+}
+</style>
+
+<div class="detail-container">
+    <p>اسم البضاعة </p> <p><h4>({{product}})</h4></p> 
     {% for worker in workers %}
         <p>المشتري <span>{{worker}}</span></p> 
     {% endfor %}
-    <p>قيمة البضاعة {{product.paid}}</p>
+    <p>قيمة البضاعة ({{product.paid}}) ريال</p>
     <p>الكمية {{product.quantity}}</p>
     <p>تاريخ ووقت الشراء {{product.date_created|date}}</p>
-    <p>المخرج {{product.outcome}}</p>
-    <p>نوع المخرجات {{product.type}}</p>
+    <p>قيمةالمخرجات {{product.outcome}} ريال</p>
+    <p>نوع المخرجات {{product.type}} </p>
     {% for worker in product.person.all %}
         <p>المخرج {{worker}}</p>
-    {% endfor %}
-    
+    {% endfor %} 
+    {% if not product.income %}
+    <p><a href="{% url 'update_income' product.pk %} "> <button>إضافة الدخل</button> </a>
+    {% endif %}
+        {% if not product.outcome %}
+            <a href="{% url 'update_outcome' product.pk %}"> <button>إضافة خرج</button> </a></p>
+        {% endif %} 
+    </div>
+
 
 {% endblock content %}
     
