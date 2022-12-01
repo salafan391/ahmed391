@@ -1,9 +1,10 @@
 {% extends 'main.html' %}
 
+
 {% block content %}
 
     <p> اهلا {{request.user.username}}</p>
-    <p><a href="{% static 'logout' %}">تسجيل الخروج</a></p>
+    <p><a href="{% static 'alfreed/logout' %}">تسجيل الخروج</a></p>
     <table class="table table-dark table-striped">
         <h3>
             جدول بيانات المبيعات
