@@ -1,13 +1,22 @@
 {% extends 'main.html' %}
 
 {% block content %}
+<style>
+    .log{
+        text-decoration: none;
+        border: .3px solid gray;
+        padding: 10px 30px;
+        margin: 10px;
+        box-shadow: .5px .5px 5px gray;
+        color: #000;
+    }
+</style>
 {% if request.user.is_authenticated %}
-    
-
     <p> اهلا {{request.user.username}}</p>
-    <p><a href="{% url 'logout' %}">تسجيل الخروج</a></p>
+    <p><a class="log" href="{% url 'logout' %}">تسجيل الخروج</a></p>
     {% else %}
-    <p><a href="{% url 'login' %}">تسجيل الدخول</a></p>
+    <p>لم تقم بتسجيل الدخول</p>
+    <p><a class="log" href="{% url 'login' %}">تسجيل الدخول</a></p>
     {% endif %}
     <table class="table table-dark table-striped">
         <h3>

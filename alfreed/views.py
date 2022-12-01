@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render, redirect
 from .forms import *
 from .models import *
 from django.db.models import Sum
@@ -8,68 +8,77 @@ from django.contrib import messages
 
 # Create your views here.
 
+
 def index(request):
     products = Sales.objects.all()
     count = products.count()
-    return render(request,'alfreed/index.html',{
-        'products':products,
-        'count':count,
-     
-        })
+    return render(request, 'alfreed/index.html', {
+        'products': products,
+        'count': count,
+
+    })
+
 
 def sales_view(request):
     form = SalesForm()
     if request.method == 'POST':
-        form= SalesForm(request.POST)
+        form = SalesForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('index')
-    return render(request,'alfreed/sales.html',{'form':form})
+    return render(request, 'alfreed/sales.html', {'form': form})
 
-def update_income_view(request,pk):
+
+def update_income_view(request, pk):
     income = Sales.objects.get(pk=pk)
     form = IncomeForm(instance=income)
     if request.method == 'POST':
-        form = IncomeForm(request.POST,instance=income)
+        form = IncomeForm(request.POST, instance=income)
         if form.is_valid():
             form.save()
             return redirect('index')
-    return render(request,'alfreed/income_form.html',{'form':form})
+    return render(request, 'alfreed/income_form.html', {'form': form})
 
-def update_outcome_view(request,pk):
+
+def update_outcome_view(request, pk):
     outcome = Sales.objects.get(pk=pk)
     form = OutcomeForm(instance=outcome)
     if request.method == 'POST':
-        form = OutcomeForm(request.POST,instance=outcome)
+        form = OutcomeForm(request.POST, instance=outcome)
         if form.is_valid():
             form.save()
             return redirect('index')
-    return render(request,'alfreed/outcome_form.html',{'form':form})
+    return render(request, 'alfreed/outcome_form.html', {'form': form})
 
 
-def details(request,pk):
+def details(request, pk):
     product = Sales.objects.get(pk=pk)
     buyer = product.worker.all()
-    return render(request,'alfreed/details.html',{
-        'product':product,
-        'workers':buyer,
-        })
-def delete(request,pk):
+    return render(request, 'alfreed/details.html', {
+        'product': product,
+        'workers': buyer,
+    })
+
+
+def delete(request, pk):
     delete = Sales.objects.get(pk=pk)
     if request.method == 'POST':
         delete.delete()
         return redirect('index')
-    return render(request,'alfreed/delete.html',{'delete':delete})
-def update_sales_view(request,pk):
+    return render(request, 'alfreed/delete.html', {'delete': delete})
+
+
+def update_sales_view(request, pk):
     sales = Sales.objects.get(pk=pk)
     form = UpdateSalesForm(instance=sales)
     if request.method == 'POST':
-        form = UpdateSalesForm(request.POST,instance=sales)
+        form = UpdateSalesForm(request.POST, instance=sales)
         if form.is_valid():
             form.save()
             return redirect('index')
-    return render(request,'alfreed/outcome_form.html',{'form':form})
-    
+    return render(request, 'alfreed/outcome_form.html', {'form': form})
+
+
 def login_user(request):
     page = 'login'
     if request.user.is_authenticated:
@@ -80,19 +89,21 @@ def login_user(request):
         try:
             user = User.objects.get(username=username)
         except:
-            messages.error(request,'اسم المستخدم غير موجود')
-        user = authenticate(request, username=username,password=password)
+            messages.error(request, 'اسم المستخدم غير موجود')
+        user = authenticate(request, username=username, password=password)
         if user is not None:
-            login(request,user)
+            login(request, user)
             return redirect('index')
         else:
-            messages.error(request,'اسم المستخدم أو كلمة المرور غير صحيحة')
-    context = {'page':page}
-    return render(request,'alfreed/login_alfreed.html',context)
+            messages.error(request, 'اسم المستخدم أو كلمة المرور غير صحيحة')
+    context = {'page': page}
+    return render(request, 'alfreed/login_alfreed.html', context)
+
 
 def logout_user(request):
     logout(request)
     return redirect('index')
+
 
 def register(request):
     form = UserRegisterForm
@@ -100,13 +111,12 @@ def register(request):
         form = UserRegisterForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
-            user.username= user.username.lower()
+            user.username = user.username.lower()
             user.save()
-            login(request,user)
+            login(request, user)
             return redirect('index')
         else:
-            messages.error(request,'اسم المستخدم او كلمة المرور لا تتطابق')
-    return render(request,'alfreed/login_alfreed.html',{
-                'form':form
-            })
-
+            messages.error(request, 'اسم المستخدم او كلمة المرور لا تتطابق')
+    return render(request, 'alfreed/login_alfreed.html', {
+        'form': form
+    })
