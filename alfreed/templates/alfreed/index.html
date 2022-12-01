@@ -1,11 +1,17 @@
 {% extends 'main.html' %}
 
 {% block content %}
+{% if request.user.is_authenticated %}
+    <p>welcome {{request.user.username}}</p>
+    
+
 
     <table class="table table-dark table-striped">
         <h3>
             جدول بيانات المبيعات
         </h3>
+            
+        
     <thead>
         <tr>
            <th>مشتريات</th> 
@@ -99,6 +105,6 @@
         </tr>
     </tbody>
 </table>
-   
+   {% endif %}
 {% endblock content %}
 

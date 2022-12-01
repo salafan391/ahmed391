@@ -1,12 +1,19 @@
 from django.shortcuts import render,redirect
 from .forms import *
 from .models import *
+from django.db.models import Sum
+from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.models import User
+from django.contrib import messages
 # Create your views here.
 
 def index(request):
-    products = Sales.objects.all()[:3]
+    products = Sales.objects.all()
+    count = products.count()
     return render(request,'alfreed/index.html',{
         'products':products,
+        'count':count,
+     
         })
 
 def sales_view(request):
@@ -61,3 +68,28 @@ def update_sales_view(request,pk):
             form.save()
             return redirect('index')
     return render(request,'alfreed/outcome_form.html',{'form':form})
+    
+def login(request):
+    page = 'login'
+    if request.user.is_authenticated:
+        return redirect('index')
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        try:
+            user = User.objects.get(username=username)
+        except:
+            messages.error(request,'اسم المستخدم غير موجود')
+        user = authenticate(request, username=username,password=password)
+        if user is not None:
+            login(request,user)
+            return redirect('index')
+        else:
+            messages.error(request,'اسم المستخدم أو كلمة المرور غير صحيحة')
+        context = {'page':page}
+        return render(request,'alfreed/login_alfreed.html',context)
+def logout(request):
+    logout(request)
+    return redirect('index')
+
+
