@@ -42,11 +42,10 @@
         <div class="mb-3">
         {% csrf_token %}
         {% for field in form  %}
-        <div>
+    
         {{field.label_tag}} 
         {{field}}
         {% endfor %}
-        </div>
     </div>
         
 </div>
