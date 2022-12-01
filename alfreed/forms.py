@@ -18,7 +18,8 @@ class SalesForm(ModelForm):
             'products': TextInput(attrs={'class': "form-label", 'class': 'form-control'}),
             'quantity': NumberInput(attrs={'class': "form-label",'class':'range'}),
             'paid': NumberInput(attrs={'class': "form-label",'class':'range'}),
-            'date_created': DateTimeInput(attrs={'type': 'datetime-local', 'class': "form-label", 'class': "form-control"})
+            'date_created': DateTimeInput(attrs={'type': 'datetime-local', 'class': "form-label", 'class': "form-control"}),
+            'worker':SelectMultiple(attrs={'class': "form-label", 'class': 'form-control'})
         }
 
 
@@ -47,8 +48,9 @@ class OutcomeForm(ModelForm):
             'person': 'اسم المخرج',
         }
         widgets = {
-            'outcome': NumberInput(attrs={'class': "form-label"}),
-            'type': TextInput(attrs={'class': "form-label", 'class': 'form-control'})
+            'outcome': NumberInput(attrs={'class': "form-label",'class': 'form-control'}),
+            'type': TextInput(attrs={'class': "form-label", 'class': 'form-control'}),
+            'person':SelectMultiple(attrs={'class':"form-label", 'class':'form-control'})
         }
 
 
@@ -75,5 +77,10 @@ class UpdateSalesForm(ModelForm):
             'date_created': DateTimeInput(attrs={'type': 'datetime-local', 'class': "form-label", 'class': "form-control"}),
             'income': NumberInput(attrs={'class': "form-label",'class': 'form-control'}),
             'outcome': NumberInput(attrs={'class': "form-label",'class': 'form-control'}),
-            'type': TextInput(attrs={'class': "form-label", 'class': 'form-control'})
+            'type': TextInput(attrs={'class': "form-label", 'class': 'form-control'}),
+            'person':SelectMultiple(attrs={'class':"form-label", 'class':'form-control'}),
+            'receipiant':SelectMultiple(attrs={'class': "form-label",'class': 'form-control'}),
+            'worker':SelectMultiple(attrs={'class': "form-label",'class':"form-select"})
+
+
         }

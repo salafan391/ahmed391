@@ -2,6 +2,7 @@
 {% load static %}
 {% block content %}
 <form class="form" action="" method="POST">
+    <h3>قالب الحذف</h3>
     <div class="mb-3">
     {% csrf_token %}
 <p>هل انت متأكد من حذف {{delete.products}}</p>
