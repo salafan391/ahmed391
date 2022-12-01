@@ -5,6 +5,7 @@ from django.db.models import Sum
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import User
 from django.contrib import messages
+
 # Create your views here.
 
 def index(request):
@@ -69,7 +70,7 @@ def update_sales_view(request,pk):
             return redirect('index')
     return render(request,'alfreed/outcome_form.html',{'form':form})
     
-def login(request):
+def login_user(request):
     page = 'login'
     if request.user.is_authenticated:
         return redirect('index')
@@ -86,10 +87,26 @@ def login(request):
             return redirect('index')
         else:
             messages.error(request,'اسم المستخدم أو كلمة المرور غير صحيحة')
-        context = {'page':page}
-        return render(request,'alfreed/login_alfreed.html',context)
-def logout(request):
+    context = {'page':page}
+    return render(request,'alfreed/login_alfreed.html',context)
+
+def logout_user(request):
     logout(request)
     return redirect('index')
 
+def register(request):
+    form = UserRegisterForm
+    if request.method == 'POST':
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.username= user.username.lower()
+            user.save()
+            login(request,user)
+            return redirect('index')
+        else:
+            messages.error(request,'اسم المستخدم او كلمة المرور لا تتطابق')
+    return render(request,'alfreed/login_alfreed.html',{
+                'form':form
+            })
 

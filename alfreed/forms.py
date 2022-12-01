@@ -1,7 +1,29 @@
 from django.forms import *
 from .models import *
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
-
+class UserRegisterForm(UserCreationForm):
+    def __init__(self, *args,**kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['password1'].widget.attrs.update({
+            'placeholder':'كلمة المرور',
+            'class':'form-label',
+            'class':'form-control',})
+        self.fields['password2'].widget.attrs.update({
+            'placeholder':'تأكيد كلمة المرور',
+            'class':'form-label',
+            'class':'form-control',
+            
+        })
+    class Meta:
+        model = User
+        fields= ['username','first_name','last_name']
+        widgets = {
+            'first_name': TextInput(attrs={'class': "form-label", 'class': "form-control",'placeholder':'الاسم الأول'}),
+            'username': TextInput(attrs={'class': "form-label", 'class': "form-control",'placeholder':'اسم المستخدم'}),
+            'last_name':TextInput(attrs={'class': "form-label", 'class': "form-control",'placeholder':'اللقب'})
+        } 
 class SalesForm(ModelForm):
     class Meta:
         model = Sales
