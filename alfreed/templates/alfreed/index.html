@@ -2,7 +2,8 @@
 
 {% block content %}
 
-    <p>welcome {{request.user.username}}</p>
+    <p> اهلا {{request.user.username}}</p>
+    <p><a href="{% static 'logout' %}">تسجيل الخروج</a></p>
     <table class="table table-dark table-striped">
         <h3>
             جدول بيانات المبيعات
