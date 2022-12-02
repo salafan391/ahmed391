@@ -26,13 +26,10 @@ def index(request):
         Q(outcome__icontains=q)|
         Q(created__icontains=q)
         ).distinct()
-    worker_sum = Sales.objects.filter()
-    p = Sales.objects.filter(products=q)
     workers = Workers.objects.all()
     return render(request, 'alfreed/index.html', {
         'products': products,
         'workers':workers,
-        'prod':p
     })
 
 
