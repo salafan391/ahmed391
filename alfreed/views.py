@@ -25,7 +25,7 @@ def index(request):
         Q(income__icontains=q)|
         Q(outcome__icontains=q)|
         Q(created__icontains=q)
-        )
+        ).distinct()
     worker_sum = Sales.objects.filter()
     p = Sales.objects.filter(products=q)
     workers = Workers.objects.all()
