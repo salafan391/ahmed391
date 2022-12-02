@@ -26,13 +26,21 @@ def index(request):
         Q(outcome__icontains=q)|
         Q(created__icontains=q)
         ).distinct()
+    
+  
+    sum = Sales.objects.filter(worker__name=q).aggregate(Sum('paid'),Sum('income'),Sum('outcome'))
+    if sum['paid__sum']is None or sum['income__sum'] is None or sum['outcome__sum'] is None:
+        sum = Sales.objects.filter().aggregate(Sum('paid'),Sum('income'),Sum('outcome'))
+
+
     workers = Workers.objects.all()
     return render(request, 'alfreed/index.html', {
         'products': products,
         'workers':workers,
+        'sum':sum,
+        
+
     })
-
-
 def sales_view(request):
     form = SalesForm()
     if request.method == 'POST':
