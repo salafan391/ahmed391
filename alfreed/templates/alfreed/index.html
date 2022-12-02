@@ -4,7 +4,6 @@
 <style>
     .log{
         text-decoration: none;
-        border: .3px solid gray;
         padding: 10px 30px;
         margin: 10px;
         box-shadow: .5px .5px 5px gray;
@@ -18,6 +17,7 @@
     <p>لم تقم بتسجيل الدخول</p>
     <p><a class="log" href="{% url 'login' %}">تسجيل الدخول</a></p>
     {% endif %}
+
     <table class="table table-dark table-striped">
         <h3>
             جدول بيانات المبيعات
@@ -27,6 +27,7 @@
     <thead>
         <tr>
            <th>مشتريات</th> 
+           <th>الكمية</th>
            <th>قيمة المشترى</th>
            <th>اسم المشتري</th>
            <th>المدخلات</th>
@@ -45,6 +46,9 @@
         <tr>
             <td>
                 {{product.products}}         
+            </td>
+            <td>
+                {{product.quantity}}
             </td>
             <td>
                 {{product.paid}}      

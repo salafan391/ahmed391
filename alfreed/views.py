@@ -5,17 +5,34 @@ from django.db.models import Sum
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.db.models import Q
+
 
 # Create your views here.
 
 
 def index(request):
-    products = Sales.objects.all()
-    count = products.count()
+    q = request.GET.get('q') if request.GET.get('q') != None else ''
+    products = Sales.objects.filter(
+        Q(worker__name__icontains=q)|
+        Q(products__icontains=q)|
+        Q(type__icontains=q)|
+        Q(receipiant__name__icontains=q)|
+        Q(person__name__icontains=q)|
+        Q(quantity__icontains=q)|
+        Q(paid__icontains=q)|
+        Q(date_created__icontains=q)|
+        Q(income__icontains=q)|
+        Q(outcome__icontains=q)|
+        Q(created__icontains=q)
+        )
+    worker_sum = Sales.objects.filter()
+    p = Sales.objects.filter(products=q)
+    workers = Workers.objects.all()
     return render(request, 'alfreed/index.html', {
         'products': products,
-        'count': count,
-
+        'workers':workers,
+        'prod':p
     })
 
 
