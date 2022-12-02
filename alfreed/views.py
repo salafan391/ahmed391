@@ -14,33 +14,34 @@ from django.db.models import Q
 def index(request):
     q = request.GET.get('q') if request.GET.get('q') != None else ''
     products = Sales.objects.filter(
-        Q(worker__name__icontains=q)|
-        Q(products__icontains=q)|
-        Q(type__icontains=q)|
-        Q(receipiant__name__icontains=q)|
-        Q(person__name__icontains=q)|
-        Q(quantity__icontains=q)|
-        Q(paid__icontains=q)|
-        Q(date_created__icontains=q)|
-        Q(income__icontains=q)|
-        Q(outcome__icontains=q)|
+        Q(worker__name__icontains=q) |
+        Q(products__icontains=q) |
+        Q(type__icontains=q) |
+        Q(receipiant__name__icontains=q) |
+        Q(person__name__icontains=q) |
+        Q(quantity__icontains=q) |
+        Q(paid__icontains=q) |
+        Q(date_created__icontains=q) |
+        Q(income__icontains=q) |
+        Q(outcome__icontains=q) |
         Q(created__icontains=q)
-        ).distinct()
-    
-  
-    sum = Sales.objects.filter(worker__name=q).aggregate(Sum('paid'),Sum('income'),Sum('outcome'))
-    if sum['paid__sum']is None or sum['income__sum'] is None or sum['outcome__sum'] is None:
-        sum = Sales.objects.filter().aggregate(Sum('paid'),Sum('income'),Sum('outcome'))
+    ).distinct()
 
-
+    sum = Sales.objects.filter(worker__name=q).aggregate(
+        Sum('paid'), Sum('income'), Sum('outcome'))
+    if sum['paid__sum'] is None or sum['income__sum'] is None or sum['outcome__sum'] is None:
+        sum = Sales.objects.filter().aggregate(
+            Sum('paid'), Sum('income'), Sum('outcome'))
     workers = Workers.objects.all()
+
+    
     return render(request, 'alfreed/index.html', {
         'products': products,
-        'workers':workers,
-        'sum':sum,
-        
-
+        'workers': workers,
+        'sum': sum,
     })
+
+
 def sales_view(request):
     form = SalesForm()
     if request.method == 'POST':

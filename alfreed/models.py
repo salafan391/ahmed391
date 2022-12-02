@@ -28,4 +28,4 @@ class Sales(models.Model):
         return str(self.products)
 
     class Meta:
-        ordering = ['-created']
+        ordering = ['-date_created']
