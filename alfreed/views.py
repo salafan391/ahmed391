@@ -7,7 +7,6 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.db.models import Q
 
-
 # Create your views here.
 
 def index(request):
@@ -25,7 +24,7 @@ def index(request):
         Q(outcome__icontains=q) |
         Q(created__icontains=q)
     ).distinct()
-
+    
     sum = Sales.objects.filter(worker__name=q).aggregate(
         Sum('paid'), Sum('income'), Sum('outcome'))
     if sum['paid__sum'] is None or sum['income__sum'] is None or sum['outcome__sum'] is None:
