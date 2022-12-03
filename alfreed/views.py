@@ -10,7 +10,6 @@ from django.db.models import Q
 
 # Create your views here.
 
-
 def index(request):
     q = request.GET.get('q') if request.GET.get('q') != None else ''
     products = Sales.objects.filter(
@@ -34,8 +33,7 @@ def index(request):
             Sum('paid'), Sum('income'), Sum('outcome'))
     workers = Workers.objects.all()
 
-    
-    return render(request, 'alfreed/index.html', {
+    return render(request, 'alfreed/index.html',{
         'products': products,
         'workers': workers,
         'sum': sum,

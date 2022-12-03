@@ -1,4 +1,6 @@
+
 {% extends 'main.html' %}
+{% load mathfilters %}
 
 {% block content %}
 <style>
@@ -48,6 +50,7 @@
         </tr>
     </thead>
     <tbody>
+        
         {% for product in products  %}
         <tr>
             <td>
@@ -72,8 +75,7 @@
       </svg></a>
       {% else %}
       {{product.income}}
-    {% endif %}
-                
+    {% endif %}     
             </td>
             <td>
                 {% for worker in product.receipiant.all %}
@@ -106,8 +108,10 @@
                 {{ outcomer }}
                 {% endfor %}
             </td>
-            <td>  
-            </td>
+            
+            <td>
+               {{product.income|sub:product.outcome}}
+            </td> 
             <td>
                 {{product.date_created|date}}
             </td>
@@ -126,6 +130,7 @@
                   </svg> </a>        
             </td>
             {% endfor %}
+            
         </tr>
     </tbody>
 </table>
