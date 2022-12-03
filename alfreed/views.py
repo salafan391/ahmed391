@@ -32,7 +32,6 @@ def index(request):
         sum = Sales.objects.filter().aggregate(
             Sum('paid'), Sum('income'), Sum('outcome'))
     workers = Workers.objects.all()
-
     return render(request, 'alfreed/index.html',{
         'products': products,
         'workers': workers,
