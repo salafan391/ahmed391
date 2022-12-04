@@ -1,5 +1,5 @@
-
 {% extends 'main.html' %}
+{% load freed %}
 {% block content %}
 <style>
     .log{
@@ -108,7 +108,7 @@
             </td>
             
             <td>
-         
+                {{product.income|subtract:product.outcome}}
             </td> 
             <td>
                 {{product.date_created|date}}

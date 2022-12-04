@@ -7,8 +7,6 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.db.models import Q
 
-# Create your views here.
-
 def index(request):
     q = request.GET.get('q') if request.GET.get('q') != None else ''
     products = Sales.objects.filter(
